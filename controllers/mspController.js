@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const axios = require("axios");
-const Msp = require("../models/mspModel");
+const Msp = require("../models/MspModel");
 
 const getMSPs = asyncHandler(async (req, res) => {
     try{
