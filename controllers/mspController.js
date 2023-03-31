@@ -21,6 +21,7 @@ const getMSPs = asyncHandler(async (req, res) => {
                 "2021_22": record?.[`_absolute_increase_over_previous_year___2021_22`],
                 "2022_23": record?.[`_absolute_increase_over_previous_year___2022_23`],
             },
+            date: new Date().toISOString(),
         }
     });
 
