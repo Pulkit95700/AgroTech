@@ -2,11 +2,6 @@ const asyncHandler = require("express-async-handler");
 const axios = require("axios");
 
 const getWeatherData = asyncHandler(async (req, res) => {
-  const city = req.query.city;
-  if (city === undefined || city === null || city === "") {
-    res.status(400);
-    throw new Error("City is required");
-  }
   try {
       const {data} = await axios.get("https://api.openweathermap.org/data/2.5/weather?lat=23.2584857&lon=77.401989&appid="+ process.env.WEATHER_API_KEY)
 
