@@ -18,7 +18,7 @@ const userRoute = require("./routes/userRoute");
 app.use("/api/users", userRoute);
 
 const weatherRoute = require("./routes/weatherRoute");
-app.use("api/weather", weatherRoute);
+app.use("/api/weather", weatherRoute);
 
 const mspRoute = require("./routes/mspRoute");
 app.use("/api/msp", mspRoute);
