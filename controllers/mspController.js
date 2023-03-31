@@ -2,9 +2,10 @@ const asyncHandler = require("express-async-handler");
 const axios = require("axios");
 
 const getMSPs = asyncHandler(async (req, res) => {
-    const data = await axios.get(`https://api.data.gov.in/resource/14389871-c2f4-4348-b4ca-b55391d4ea0b?api-key=${process.env.DATA_API_KEY}&format=json&limit=20`)
+    try{
+    const data = await axios.get(`https://api.data.gov.in/resource/14389871-c2f4-4348-b4ca-b55391d4ea0b?api-key=${process.env.DATA_API_KEY}&format=json&limit=20`);
     let records = data.data.records;
-    
+    console.log(records);
     records = records.map( record => {
         return {
             id: record?.[`_sl__no_`],
@@ -25,7 +26,26 @@ const getMSPs = asyncHandler(async (req, res) => {
         }
     });
 
+    const Msps = await Msp.find();
+
+    if(Msps.length === 0) {
+        await Msp.insertMany(records);
+    }else{
+        await Msp.deleteMany();
+        await Msp.insertMany(records);
+    }
+
     res.status(200).json(records);
+    }
+    catch(err) {
+        const Msp = await Msp.find();
+        if(Msp.length === 0) {
+            res.status(500);
+            throw new Error("No MSPs found");
+        }
+        
+        res.status(200).json(Msp);
+    }
 })
 
 module.exports = { getMSPs };
