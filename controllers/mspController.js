@@ -6,7 +6,6 @@ const getMSPs = asyncHandler(async (req, res) => {
     try{
     const data = await axios.get(`https://api.data.gov.in/resource/14389871-c2f4-4348-b4ca-b55391d4ea0b?api-key=${process.env.DATA_API_KEY}&format=json&limit=20`);
     let records = data.data.records;
-    console.log(records);
     records = records.map( record => {
         return {
             id: record?.[`_sl__no_`],
