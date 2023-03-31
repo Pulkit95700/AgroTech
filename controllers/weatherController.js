@@ -3,7 +3,7 @@ const axios = require("axios");
 
 const getWeatherData = asyncHandler(async (req, res) => {
   try {
-      const {data} = await axios.get("https://api.openweathermap.org/data/2.5/weather?lat=23.2584857&lon=77.401989&appid="+ process.env.WEATHER_API_KEY)
+      const {data} = await axios.get("https://api.openweathermap.org/data/2.5/weather?lat=23.2584857&lon=77.401989&units=metric&appid="+ process.env.WEATHER_API_KEY)
 
       res.status(200).json({
         id: data.weather[0].id,
